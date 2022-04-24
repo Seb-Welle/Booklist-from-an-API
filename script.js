@@ -3,6 +3,12 @@ const booksTableBody = booksTable.querySelector("tbody");
 
 const wishlist = [];
 
+function addToWishlist(id) {
+  wishlist.push(id);
+  //console.log(wishlist);
+  localStorage.setItem("wishlist", JSON.stringify(wishlist));
+}
+
 // Daten fetchen - alle Bücher
 
 const books = fetch("https://bookmonkey-api.jgreg.uber.space/books")
@@ -24,7 +30,13 @@ const books = fetch("https://bookmonkey-api.jgreg.uber.space/books")
       const buttonTd = document.createElement("td");
       const button = document.createElement("button");
       button.textContent = "Add";
-      button.addEventListener("click", () => {});
+
+      console.log(book.id);
+
+      const id = book.id;
+      button.addEventListener("click", () => {
+        addToWishlist(id);
+      });
 
       buttonTd.appendChild(button);
 
